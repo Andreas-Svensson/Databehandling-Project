@@ -1,0 +1,119 @@
+/* ---------- ------------ ---------- */
+/* ---------- Color Scheme ---------- */
+/* ---------- ------------ ---------- */
+
+/* Setting up global variables (done with :root) for the colors commonly used in the dashboard */
+:root {
+    --background: #0F2537;
+    --element: #4E5D6C;
+    --text: #EBEBEB;
+    --highlight: #02D2D5;
+    --gold: #e7c024;
+    --silver: #a1e1e1;
+    --bronze: #e78224;
+    --test: #00d0ff;
+}
+
+/* ---------- --------------- ---------- */
+/* ---------- Default Styling ---------- */
+/* ---------- --------------- ---------- */
+
+body {
+    padding-top: 25px;
+}
+
+.row {
+    padding-top: 10px;
+}
+
+.btn {
+    /* background-color: var(--element); */
+    color: var(--text);
+}
+
+.btn:hover {
+    background-color: var(--background);
+    color: var(--text);
+}
+
+.btn:focus {
+    /* After clicking button, before clicking somewhere else */
+    background-color: red;
+}
+
+.btn:active {
+    /* When mouse is held down on button */
+    background-color: green;
+}
+
+/* ---------- ----------------- ---------- */
+/* ---------- Styling Dropdowns ---------- */
+/* ---------- ----------------- ---------- */
+
+/* Default style of all dropdowns */
+.Select,
+.Select div,
+.Select input,
+.Select span {
+    background: var(--element);
+    color: var(--text);
+}
+
+/* Default style for selected option of all dropdowns, note that !import has to be used for it to apply */
+.Select-value-label {
+    color: var(--text) !important;
+}
+
+/* Default style of hovered row of all dropdowns, not that !important has to be used for it to apply */
+.VirtualizedSelectFocusedOption {
+    background-color: var(--background) !important;
+    color: var(--highlight) !important;
+}
+
+/* ---------- --------- ---------- */
+/* ---------- Banner ID ---------- */
+/* ---------- --------- ---------- */
+
+#banner h1 {
+    /* Styling of h1 text in banner */
+    padding-top: 10px;
+    margin-left: 2%;
+    display: inline-block;
+}
+
+#banner Img {
+    position: relative;
+    float: right;
+    margin-right: 2px;
+    height: 75px;
+}
+
+/* ---------- ----------------------- ---------- */
+/* ---------- Styling Smaller Screens ---------- */
+/* ---------- ----------------------- ---------- */
+
+@media (max-width: 767px) {
+
+    /* CSS that should be displayed if width is less than 768px wide (smaller than the size of an iPad Mini) */
+
+    body {
+        padding-top: 10px;
+    }
+
+    #banner h1 {
+        padding-top: 10px;
+    }
+
+    #banner Img {
+        float: left;
+    }
+
+    .col-3-wide {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media (orientation: landscape) and (max-width: 800px) {
+    /* maybe some custom styling for mobile devices in landscape mode is needed */
+}
