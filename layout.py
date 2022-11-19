@@ -13,12 +13,14 @@ class Layout:
         return dbc.Container(
             [
                 dbc.Card(
-                    dbc.CardBody(
-                        [
-                            html.Img(src="assets/usa-flag.png"),
-                            html.H1("OS Dashboard - USA"),
-                        ],
-                    ),
+                    [
+                        dbc.CardBody(
+                            [
+                                html.Img(src="assets/usa-flag.png"),
+                                html.H1("OS Dashboard - USA"),
+                            ],
+                        ),
+                    ],
                     id="banner",
                 ),
                 dbc.Row(
@@ -45,26 +47,19 @@ class Layout:
                                         [
                                             dbc.RadioItems(
                                                 id="log-buttons",
-                                                children=[
-                                                    html.Img(src="assets/usa-flag.png")
-                                                ],
-                                                className="btn-group",  # groups radio items side-by-side
-                                                inputClassName="btn-check",  # hides radio buttons checkbox
-                                                labelClassName="btn btn-outline-secondary",  # adds an outline to the button, colors it and the text
-                                                # labelCheckedClassName="active",
+                                                className="btn-group",
+                                                # these class names taken from https://dash-bootstrap-components.opensource.faculty.ai/docs/components/button_group/
+                                                inputClassName="btn-check",
+                                                labelClassName="btn btn-outline-primary",
+                                                labelCheckedClassName="active",
                                                 options=[
-                                                    {
-                                                        "label": "Normal",
-                                                        "value": False,
-                                                    },
-                                                    {
-                                                        "label": "Log",
-                                                        "value": True,
-                                                    },
+                                                    {"label": "Normal", "value": False},
+                                                    {"label": "Log", "value": True},
                                                 ],
                                                 value=False,
                                             ),
                                         ],
+                                        className="radio-group",
                                     ),
                                     dbc.Col(
                                         dbc.Checklist(
