@@ -18,13 +18,9 @@
 /* ---------- Default Styling ---------- */
 /* ---------- --------------- ---------- */
 
-body {
-    padding-top: 25px;
-}
-
-.row {
+/* .row {
     padding-top: 10px;
-}
+} */
 
 .btn {
     /* background-color: var(--element); */
@@ -44,6 +40,28 @@ body {
 .btn:active {
     /* When mouse is held down on button */
     background-color: green;
+}
+
+/* ---------- -------------------- ---------- */
+/* ---------- Styling Button Group ---------- */
+/* ---------- -------------------- ---------- */
+
+/* RadioItems styling, changing RadioItems to act as a button group, this styling changes their padding and aligns them next to each other */
+/* Source: https://dash-bootstrap-components.opensource.faculty.ai/docs/components/button_group/ */
+
+.radio-group .form-check {
+    padding-left: 0;
+}
+
+.radio-group .btn-group>.form-check:not(:last-child)>.btn {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.radio-group .btn-group>.form-check:not(:first-child)>.btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-left: -1px;
 }
 
 /* ---------- ----------------- ---------- */
@@ -74,8 +92,12 @@ body {
 /* ---------- Banner ID ---------- */
 /* ---------- --------- ---------- */
 
+#banner {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 #banner h1 {
-    /* Styling of h1 text in banner */
     padding-top: 10px;
     margin-left: 2%;
     display: inline-block;
