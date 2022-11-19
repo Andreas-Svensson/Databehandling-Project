@@ -29,10 +29,13 @@ class Layout:
                                 id="dropdown",
                                 className="dropdown",
                                 options=[
-                                    "Medals in USA",
-                                    "Medals per sport",
+                                    "Medals Total",
+                                    "Medals Basketball",
+                                    "Medals Boxing",
+                                    "Medals Football",
+                                    "Medals Ice Hockey",
                                 ],  # set this to variable value
-                                value="Medals in USA",  # default value of dropdown
+                                value="Medals Total",  # default value of dropdown
                             ),
                         ),
                         dbc.Col(
