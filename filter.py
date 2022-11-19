@@ -25,10 +25,10 @@ def set_default_filters(df, dropdown_selection):
     """Resets all button choices to default whenever the dropdown is used to show a new graph"""
 
     if dropdown_selection == "Medals Total":
-        return (False, ["Summer", "Winter"], [df["Year"].min(), df["Year"].max()])
+        return (False, ["Summer", "Winter"], [df["Year"].min(), df["Year"].max()], 30)
 
     if dropdown_selection[7:] in ["Basketball", "Boxing", "Football", "Ice Hockey"]:
-        return (True, ["Summer", "Winter"], [df["Year"].min(), df["Year"].max()])
+        return (True, ["Summer", "Winter"], [df["Year"].min(), df["Year"].max()], 30)
 
     print("WARNING: No dropdown selection was matched when setting default filters")
     pass
