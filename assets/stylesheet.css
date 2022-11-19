@@ -10,6 +10,10 @@
     --highlight: #02D2D5;
 }
 
+.col {
+    margin-top: 10px;
+}
+
 /* ---------- --------------- ---------- */
 /* ---------- Default Buttons ---------- */
 /* ---------- --------------- ---------- */
@@ -76,7 +80,6 @@
 
 #banner {
     margin-top: 10px;
-    margin-bottom: 10px;
 }
 
 #banner h1 {
@@ -86,7 +89,7 @@
 }
 
 #banner Img {
-    position: relative;
+    /* position: relative; */
     float: right;
     margin-right: 2px;
     height: 75px;
@@ -179,17 +182,8 @@
 @media (max-width: 767px) {
 
     /* When screen width is <= 767px */
-    /* Smaller top padding */
     /* Moves banner image to left side */
     /* Flexes columns of button input row down */
-
-    body {
-        padding-top: 10px;
-    }
-
-    #banner h1 {
-        padding-top: 10px;
-    }
 
     #banner Img {
         float: left;
@@ -198,6 +192,10 @@
     .col-3-wide {
         display: flex;
         flex-direction: column;
+    }
+
+    #season-picker label {
+        padding-left: 5px;
     }
 }
 
