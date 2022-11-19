@@ -35,7 +35,7 @@ def style(fig):
     return fig
 
 
-def plot_data(data: pd.DataFrame, dropdown_selection, log, results):
+def plot_data(data: pd.DataFrame, dropdown_selection, log, amount_results):
 
     # TODO add in rest of graphs
 
@@ -50,7 +50,7 @@ def plot_data(data: pd.DataFrame, dropdown_selection, log, results):
         )
 
         # plotting based on parameters
-        fig = px.bar(data.head(results), x="Sport", y="Medal", log_y=log)
+        fig = px.bar(data.head(amount_results), x="Sport", y="Medal", log_y=log)
 
         # color="Year",
         # color_discrete_map=colors
@@ -77,7 +77,7 @@ def plot_data(data: pd.DataFrame, dropdown_selection, log, results):
         custom_dict = {"Gold": 0, "Silver": 1, "Bronze": 2}
         data["rank"] = data["Medal"].map(custom_dict)
         data.sort_values(by=["rank", "Count"], ascending=[True, False], inplace=True)
-        data = data[data["Team"].isin(data["Team"].head(results))]
+        data = data[data["Team"].isin(data["Team"].head(amount_results))]
         # ---
 
         # sort by count of gold medals
