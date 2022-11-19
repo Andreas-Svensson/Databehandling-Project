@@ -35,6 +35,7 @@ app.layout = Layout(df).layout()
     Output("log-buttons", "value"),
     Output("season-picker", "value"),
     Output("year-slider", "value"),
+    Output("amount-results-slider", "value"),
     Input("dropdown", "value"),
 )
 def set_default_options(dropdown_selection):
@@ -47,11 +48,12 @@ def set_default_options(dropdown_selection):
     Input("log-buttons", "value"),
     Input("season-picker", "value"),
     Input("year-slider", "value"),
+    Input("amount-results-slider", "value"),
 )
-def update_graph(dropdown_selection, log, season, slider):
+def update_graph(dropdown_selection, log, season, slider, results):
 
     data = filter_data(df, season, slider)
-    return plot_data(data, dropdown_selection, log)
+    return plot_data(data, dropdown_selection, log, results)
 
 
 if __name__ == "__main__":
