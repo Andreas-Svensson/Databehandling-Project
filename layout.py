@@ -27,68 +27,98 @@ class Layout:
                     className="col-3-wide",
                     children=[
                         dbc.Col(
-                            dcc.Dropdown(
-                                id="dropdown",
-                                className="dropdown",
-                                options=[
-                                    "Medals Total",
-                                    "Medals Basketball",
-                                    "Medals Boxing",
-                                    "Medals Football",
-                                    "Medals Ice Hockey",
-                                ],  # set this to variable value
-                                value="Medals Total",  # default value of dropdown
-                            ),
+                            id="column-one",
+                            children=[
+                                dcc.Dropdown(
+                                    id="dropdown",
+                                    className="dropdown",
+                                    options=[
+                                        "Medals Total",
+                                        "Medals Basketball",
+                                        "Medals Boxing",
+                                        "Medals Football",
+                                        "Medals Ice Hockey",
+                                    ],  # set this to variable value
+                                    value="Medals Total",  # default value of dropdown
+                                )
+                            ],
                         ),
                         dbc.Col(
-                            dbc.Row(
-                                [
-                                    dbc.Col(
-                                        [
-                                            dbc.RadioItems(
-                                                id="log-buttons",
-                                                className="btn-group",
-                                                # these class names taken from https://dash-bootstrap-components.opensource.faculty.ai/docs/components/button_group/
-                                                inputClassName="btn-check",
-                                                labelClassName="btn btn-outline-primary",
-                                                labelCheckedClassName="active",
-                                                options=[
-                                                    {"label": "Normal", "value": False},
-                                                    {"label": "Log", "value": True},
-                                                ],
-                                                value=False,
-                                            ),
-                                        ],
-                                        className="radio-group",
-                                    ),
-                                    dbc.Col(
+                            id="column-two",
+                            className="radio-group",
+                            children=[
+                                html.Div(
+                                    id="buttons",
+                                    children=[
+                                        dbc.RadioItems(
+                                            id="log-buttons",
+                                            className="btn-group",
+                                            # these class names taken from https://dash-bootstrap-components.opensource.faculty.ai/docs/components/button_group/
+                                            inputClassName="btn-check",
+                                            labelClassName="btn btn-outline-primary",
+                                            labelCheckedClassName="active",
+                                            options=[
+                                                {
+                                                    "label": "Normal",
+                                                    "value": False,
+                                                },
+                                                {
+                                                    "label": "Log",
+                                                    "value": True,
+                                                },
+                                            ],
+                                            value=False,
+                                        ),
                                         dbc.Checklist(
                                             id="season-picker",
                                             options=[
-                                                dict(label="Summer", value="Summer"),
-                                                dict(label="Winter", value="Winter"),
+                                                dict(
+                                                    label="Summer",
+                                                    value="Summer",
+                                                ),
+                                                dict(
+                                                    label="Winter",
+                                                    value="Winter",
+                                                ),
                                             ],
                                             value=["Summer", "Winter"],
                                             inline=True,
-                                        )
-                                    ),
-                                ]
-                            ),
+                                        ),
+                                    ],
+                                ),
+                            ],
+                        ),
+                        dbc.Col(
+                            id="column-three",
+                            children=[
+                                html.P("Results:"),
+                                dcc.Slider(
+                                    id="amount-results-slider",
+                                    min=10,
+                                    max=50,
+                                    step=10,
+                                    value=10,
+                                ),
+                            ],
                         ),
                     ],
                 ),
                 dbc.Row(dcc.Graph(id="graph-id")),
                 dbc.Row(
-                    dcc.RangeSlider(
-                        id="year-slider",
-                        min=self._min,
-                        max=self._max,
-                        step=2,
-                        tooltip=dict(placement="bottom", always_visible=True),
-                        marks=None,
-                    )
+                    id="year-slider-row",
+                    children=[
+                        html.P("Year span:"),
+                        dcc.RangeSlider(
+                            id="year-slider",
+                            min=self._min,
+                            max=self._max,
+                            step=2,
+                            tooltip=dict(placement="bottom", always_visible=True),
+                            marks=None,
+                        ),
+                    ],
                 ),
                 # storing intermediate value on clients browser in order to share between several callbacks
-                dcc.Store(id="df-athlete"),
+                dcc.Store(id="df-athlete"),  # TODO delete
             ]
         )
