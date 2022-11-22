@@ -30,5 +30,8 @@ def set_default_filters(df, dropdown_selection):
     if dropdown_selection[7:] in ["Basketball", "Boxing", "Football", "Ice Hockey"]:
         return (True, ["Summer", "Winter"], [df["Year"].min(), df["Year"].max()], 30)
 
+    if dropdown_selection == "Gender Distribution":
+        return (False, ["Summer", "Winter"], [df["Year"].min(), df["Year"].max()], 30)
+
     print("WARNING: No dropdown selection was matched when setting default filters")
     pass
