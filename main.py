@@ -12,7 +12,9 @@ from plot import plot_data
 
 # for navigating relatively to the absolute path of this directory
 dir_path = os.path.dirname(__file__)
-path = os.path.join(dir_path, "path")  # placeholder "path" for now
+path = os.path.join(dir_path, "Data/anonymized_olympics_data.csv")
+# reading in anonymised version of data and storing as df
+df = pd.read_csv(path)
 
 # using __name__ instead of hard typed name allows us to use "main" when deploying dashboard and __main__ when running from this file
 # using theme SUPERHERO because we have USA ;)
@@ -27,7 +29,6 @@ app = dash.Dash(
 
 # setting the dashboard layout based on imported layout module
 # (creating an instance of Layout class)
-df = pd.read_csv("Data/athlete_events.csv")
 app.layout = Layout(df).layout()
 
 
@@ -58,4 +59,4 @@ def update_graph(dropdown_selection, log, season, slider, results):
 
 if __name__ == "__main__":
     # run app if script is run from main
-    app.run_server(debug=True)  # TODO remove from debug mode before deploying
+    app.run_server()

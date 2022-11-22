@@ -8,15 +8,10 @@ def filter_data(data, season, slider):
 
     data = data[data["Season"].isin([*season])]
 
-    # TODO look up how to set slider default values to avoid this if-statement
     if slider:
         data = data[data["Year"].between(min(slider), max(slider))].sort_values(
             by="Year", ascending=False
         )
-
-    # TODO add a country / world button
-    # if country:
-    #     data = data[data["Team"] == country]
 
     return data
 
