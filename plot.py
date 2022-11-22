@@ -1,48 +1,43 @@
 import pandas as pd
 import plotly_express as px
+import matplotlib as plt
 
 # Script for plotting DataFrame based on dropdown selection
 
 
-# Setting up colors commonly used throughout the dashboard, these will be used in styling graphs
-# TODO decide on final colors
-colors = {
-    "Gold": "#e7c024",
-    "Silver": "#a1e1e1",
-    "Bronze": "#e78224",
-    "Summer": "#ee7722",
-    "Winter": "#22ccff",
-}
-flag_red = "#8A2234"
-flag_blue = "#3C3B6E"
-background = "#0F2537"
-element = "#4E5D6C"
-text = "#EBEBEB"
-highlight = "#02D2D5"
-
-
 def style(fig):
+    """
+    Takes figure object, returns styled figure object -
+    Updates the color style of a given figure to match that of the dashboard
+    """
+
+    # colors used for styling figure
+    bg_color = "#0F2537"
+    white_ish = "#EBEBEB"
 
     fig.update_layout(
-        # TODO does the fig need a title, or can the text in the dropdown be used instead?
-        # moving title to the middle of the screen, and anchoring it to the center, and changing font size
-        # title=dict(x=0.5, xanchor="center", font=dict(size=25)),
         # updating text and background colors of the figure
-        font=dict(color=text),
-        plot_bgcolor=text,
-        paper_bgcolor=background,
+        font=dict(color=white_ish),
+        plot_bgcolor=white_ish,
+        paper_bgcolor=bg_color,
     )
     return fig
 
 
 def plot_data(data: pd.DataFrame, dropdown_selection, log, amount_results):
+    """
+    Takes a filtered dataset and returns a graph object based on:
+    dropdown_selection, log, amount_results which are all values of elements in layout.py with respective ID
+    """
 
     if len(data) < 1:  # if all data was filtered out
         # return an empty graph (to prevent any errors in trying to plot based on an empty dataframe)
         fig = px.line(title="No data for this selection")
         return style(fig)
 
-    if dropdown_selection == "Medals Total":
+    # NOTE: if no dropdown selection was made, this graph will be displayed as it is the default graph
+    if dropdown_selection == "Medals Total" or dropdown_selection == None:
+        # NOTE code for this plot from Max
         data = (
             data[["Sport", "Medal"]]
             .groupby("Sport")
@@ -55,12 +50,9 @@ def plot_data(data: pd.DataFrame, dropdown_selection, log, amount_results):
         # plotting based on parameters
         fig = px.bar(data.head(amount_results), x="Sport", y="Medal", log_y=log)
 
-        # color="Year",
-        # color_discrete_map=colors
-        # color_discrete_map="Årstid"
-        # title=dropdown_option,
-
     if dropdown_selection[7:] in ["Basketball", "Boxing", "Football", "Ice Hockey"]:
+        # NOTE code for this plot from Elias
+
         sport = dropdown_selection[7:]
         data = data[data["Sport"] == sport]
 
@@ -76,12 +68,22 @@ def plot_data(data: pd.DataFrame, dropdown_selection, log, amount_results):
             name="Count"
         )  # reset_index(name="Count") resets the index and adds a new column named Count
 
-        # NOTE test code by andreas
-        custom_dict = {"Gold": 0, "Silver": 1, "Bronze": 2}
+        # -----
+        # NOTE: code to be able to use amount of results slider for this graph - by andreas
+        # set a value corresponding to each medal type
+        custom_dict = {
+            "Gold": 0,
+            "Silver": 1,
+            "Bronze": 2,
+        }
+        # create a column based on dict values
         data["rank"] = data["Medal"].map(custom_dict)
+        # sort by those values primarily, and the count secondarily
+        # this results in gold high amount -> low amount, silver high amount -> low amount, bronze high amount -> low amount
         data.sort_values(by=["rank", "Count"], ascending=[True, False], inplace=True)
+        # then pick out head(amount_results) to get all 3 medal types, for the top n teams in terms of most gold -> silver -> bronze medals
         data = data[data["Team"].isin(data["Team"].head(amount_results))]
-        # ---
+        # -----
 
         # sort by count of gold medals
         # data = data.sort_values(by=["Count"], ascending=False).reset_index(drop=True)
@@ -100,9 +102,9 @@ def plot_data(data: pd.DataFrame, dropdown_selection, log, amount_results):
         )
 
     if dropdown_selection == "Gender Distribution":
-        """Plotting gender representation comparison between US and globally over time"""
+        # NOTE code for this plot from Andreas
 
-        data = data.sort_values(by="Year", ascending=False).reset_index(drop=True)
+        data = data.sort_values(by="Year").reset_index(drop=True)
 
         # dictionary of series title and filtered content from data:
         columns = {
