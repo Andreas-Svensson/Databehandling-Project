@@ -38,6 +38,7 @@ class Layout:
                                         "Medals Boxing",
                                         "Medals Football",
                                         "Medals Ice Hockey",
+                                        "Gender Distribution",
                                     ],  # set this to variable value
                                     value="Medals Total",  # default value of dropdown
                                 )
