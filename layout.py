@@ -17,7 +17,7 @@ class Layout:
                         dbc.CardBody(
                             [
                                 html.Img(src="assets/usa-flag.png"),
-                                html.H1("OS Dashboard - USA"),
+                                html.H1("Olympic Games - USA"),
                             ],
                         ),
                     ],
@@ -34,10 +34,10 @@ class Layout:
                                     className="dropdown",
                                     options=[
                                         "Medals Total",
-                                        "Medals Basketball",
+                                        # "Medals Basketball",
                                         "Medals Boxing",
-                                        "Medals Football",
-                                        "Medals Ice Hockey",
+                                        # "Medals Football",
+                                        # "Medals Ice Hockey",
                                         "Gender Distribution",
                                     ],  # set this to variable value
                                     value="Medals Total",  # default value of dropdown
