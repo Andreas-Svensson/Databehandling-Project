@@ -141,6 +141,9 @@ def plot_data(data: pd.DataFrame, dropdown_selection, log, amount_results):
             .head(amount_results)
         )
 
+        # replacing years where no people attended with 0 to better show visually in the graph
+        df_genders_amount.fillna(0, inplace=True)
+
         # list of all series to plot
         lines = [
             "Amount Men Global",
