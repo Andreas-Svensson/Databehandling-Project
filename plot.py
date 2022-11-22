@@ -37,7 +37,10 @@ def style(fig):
 
 def plot_data(data: pd.DataFrame, dropdown_selection, log, amount_results):
 
-    # TODO add in rest of graphs
+    if len(data) < 1:  # if all data was filtered out
+        # return an empty graph (to prevent any errors in trying to plot based on an empty dataframe)
+        fig = px.line(title="No data for this selection")
+        return style(fig)
 
     if dropdown_selection == "Medals Total":
         data = (
@@ -95,5 +98,73 @@ def plot_data(data: pd.DataFrame, dropdown_selection, log, amount_results):
             color_discrete_sequence=["gold", "silver", "brown"],
             title="Medal distribution for boxing",
         )
+
+    if dropdown_selection == "Gender Distribution":
+        """Plotting gender representation comparison between US and globally over time"""
+
+        data = data.sort_values(by="Year", ascending=False).reset_index(drop=True)
+
+        # dictionary of series title and filtered content from data:
+        columns = {
+            "Men Global": data[data["Sex"] == "M"].groupby(["Year"]).count()["Sex"],
+            "Women Global": data[data["Sex"] == "F"].groupby(["Year"]).count()["Sex"],
+            "Combined Global": data.groupby(["Year"]).count()["Sex"],
+            "Men USA": data[(data["Sex"] == "M") & (data["NOC"] == "USA")]
+            .groupby(["Year"])
+            .count()["Sex"],
+            "Women USA": data[(data["Sex"] == "F") & (data["NOC"] == "USA")]
+            .groupby(["Year"])
+            .count()["Sex"],
+            "Combined USA": data[data["NOC"] == "USA"].groupby(["Year"]).count()["Sex"],
+        }
+        # creating new dataframe from dictionary containing the (absolute) amount of gender participants of each game
+        df_genders = pd.DataFrame(columns)
+
+        # creating a dictionary of relative amount from absolute amount dataframe
+        columns = {
+            "Amount Men Global": (
+                df_genders["Men Global"] / df_genders["Combined Global"]
+            ),
+            "Amount Women Global": (
+                df_genders["Women Global"] / df_genders["Combined Global"]
+            ),
+            "Amount Men USA": (df_genders["Men USA"] / df_genders["Combined USA"]),
+            "Amount Women USA": (df_genders["Women USA"] / df_genders["Combined USA"]),
+        }
+
+        # creating new dataframe from dictionary containing the (relative) amount of gender participants of each game
+        df_genders_amount = (
+            pd.DataFrame(columns)
+            .sort_values(by="Year", ascending=False)
+            .head(amount_results)
+        )
+
+        # list of all series to plot
+        lines = [
+            "Amount Men Global",
+            "Amount Women Global",
+            "Amount Men USA",
+            "Amount Women USA",
+        ]
+
+        # plotting series
+        fig = px.line(
+            df_genders_amount,
+            x=df_genders_amount.index,
+            y=lines,
+            title="Gender Distribution of OS Competitors over time",
+            labels={"variable": "Amount", "value": "Amount"},
+            log_y=log,
+        )
+
+        # styling traces based on what they show
+        for trace in lines:
+            color = "blue" if "Men" in trace else "red"
+            dash = "solid" if "Global" in trace else "dot"
+            fig.update_traces(
+                patch={"line": {"color": color, "dash": dash}},
+                # specifying which line to apply style to
+                selector={"legendgroup": trace},
+            )
 
     return style(fig)
