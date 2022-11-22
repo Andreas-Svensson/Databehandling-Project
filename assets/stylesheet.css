@@ -1,0 +1,204 @@
+/* ---------- ------------ ---------- */
+/* ---------- Color Scheme ---------- */
+/* ---------- ------------ ---------- */
+
+/* Setting up global variables (done with :root) for the colors commonly used in the dashboard */
+:root {
+    --background: #0F2537;
+    --element: #4E5D6C;
+    --text: #EBEBEB;
+    --highlight: #02D2D5;
+}
+
+.col {
+    margin-top: 10px;
+}
+
+/* ---------- --------------- ---------- */
+/* ---------- Default Buttons ---------- */
+/* ---------- --------------- ---------- */
+
+.btn {
+    /* background-color: var(--element); */
+    color: var(--text);
+}
+
+.btn:hover {
+    background-color: var(--background);
+    color: var(--text);
+}
+
+/* ---------- -------------------- ---------- */
+/* ---------- Styling Button Group ---------- */
+/* ---------- -------------------- ---------- */
+
+/* RadioItems styling, changing RadioItems to act as a button group, this styling changes their padding and aligns them next to each other */
+/* Source: https://dash-bootstrap-components.opensource.faculty.ai/docs/components/button_group/ */
+
+.radio-group .form-check {
+    padding-left: 0;
+}
+
+.radio-group .btn-group>.form-check:not(:last-child)>.btn {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.radio-group .btn-group>.form-check:not(:first-child)>.btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-left: -1px;
+}
+
+/* ---------- ----------------- ---------- */
+/* ---------- Styling Dropdowns ---------- */
+/* ---------- ----------------- ---------- */
+
+/* Default style of all dropdowns */
+.Select,
+.Select div,
+.Select input,
+.Select span {
+    background: var(--element);
+    color: var(--text);
+}
+
+/* Default style for selected option of all dropdowns, note that !import has to be used for it to apply */
+.Select-value-label {
+    color: var(--text) !important;
+}
+
+/* Default style of hovered row of all dropdowns, not that !important has to be used for it to apply */
+.VirtualizedSelectFocusedOption {
+    background-color: var(--background) !important;
+    color: var(--highlight) !important;
+}
+
+/* ---------- --------- ---------- */
+/* ---------- Banner ID ---------- */
+/* ---------- --------- ---------- */
+
+#banner {
+    margin-top: 10px;
+}
+
+#banner h1 {
+    padding-top: 10px;
+    margin-left: 2%;
+    display: inline-block;
+}
+
+#banner Img {
+    /* position: relative; */
+    float: right;
+    margin-right: 2px;
+    height: 75px;
+}
+
+/* makes elements in the column align side-by-side */
+#buttons {
+    display: flex;
+}
+
+#log-buttons {
+    /* prevent buttons from overlapping */
+    padding-right: 25px;
+}
+
+#year-slider-row {
+    display: flex;
+}
+
+/* ---------- ------------- ---------- */
+/* ---------- Season Picker ---------- */
+/* ---------- ------------- ---------- */
+
+#season-picker {
+    display: flex;
+    margin-top: 5px;
+}
+
+#season-picker input {
+    margin-left: 0px;
+}
+
+#season-picker label {
+    margin-left: 5px;
+}
+
+#amount-results-slider {
+    /* flex-wrap: wrap; */
+    display: flex;
+    margin-top: 7px;
+    /* This property will expand the last item to the remaining width */
+    flex-grow: 1;
+}
+
+#column-one {
+    /* background-color: chocolate; */
+}
+
+#column-two {
+    /* background-color: green; */
+}
+
+#column-three {
+    /* background-color: red; */
+    display: flex;
+}
+
+/* ---------- ----------------------- ---------- */
+/* ---------- Styling Smaller Screens ---------- */
+/* ---------- ----------------------- ---------- */
+
+@media (max-width: 1200px) {
+
+    /* When screen width is <= 1200px  */
+    /* Flexes text elements of button input row down */
+
+    /* .col-3-wide {
+        display: flex;
+        flex-direction: column;
+    } */
+
+    #column-three {
+        /* display: flex; */
+        flex-direction: column;
+    }
+
+    #amount-results-slider {
+        margin-top: -10px;
+    }
+
+    #season-picker label {
+        margin-left: 0px;
+    }
+
+    /* #test-slider {
+        flex-direction: column;
+    } */
+}
+
+@media (max-width: 767px) {
+
+    /* When screen width is <= 767px */
+    /* Moves banner image to left side */
+    /* Flexes columns of button input row down */
+
+    #banner Img {
+        float: left;
+    }
+
+    .col-3-wide {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #season-picker label {
+        padding-left: 5px;
+    }
+}
+
+@media (orientation: landscape) and (max-width: 800px) {
+    /* maybe some custom styling for mobile devices in landscape mode is needed */
+}
