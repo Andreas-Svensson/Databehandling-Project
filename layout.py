@@ -4,7 +4,6 @@ import dash_bootstrap_components as dbc
 
 class Layout:
     def __init__(self, df) -> None:
-        self._df = df
         self._min = df["Year"].min()
         self._max = df["Year"].max()
 
@@ -119,7 +118,5 @@ class Layout:
                         ),
                     ],
                 ),
-                # storing intermediate value on clients browser in order to share between several callbacks
-                dcc.Store(id="df-athlete"),  # TODO delete
             ]
         )

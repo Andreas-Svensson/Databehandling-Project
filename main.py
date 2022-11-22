@@ -59,4 +59,4 @@ def update_graph(dropdown_selection, log, season, slider, results):
 
 if __name__ == "__main__":
     # run app if script is run from main
-    app.run_server(debug=True)  # TODO remove from debug mode before deploying
+    app.run_server()
