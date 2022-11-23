@@ -36,8 +36,12 @@ def plot_data(data: pd.DataFrame, dropdown_selection, log, amount_results):
         return style(fig)
 
     # NOTE: if no dropdown selection was made, this graph will be displayed as it is the default graph
-    if dropdown_selection == "Medals Total" or dropdown_selection == None:
+    if dropdown_selection == "Medals USA" or dropdown_selection == None:
         # NOTE code for this plot from Max
+
+        country_condition = ["United States"]
+        data = data[data["Team"].isin(country_condition)]
+
         data = (
             data[["Sport", "Medal"]]
             .groupby("Sport")
@@ -48,7 +52,13 @@ def plot_data(data: pd.DataFrame, dropdown_selection, log, amount_results):
         )
 
         # plotting based on parameters
-        fig = px.bar(data.head(amount_results), x="Sport", y="Medal", log_y=log)
+        fig = px.bar(
+            data.head(amount_results),
+            x="Sport",
+            y="Medal",
+            log_y=log,
+            title="Medals USA",
+        )
 
     if dropdown_selection[7:] in ["Basketball", "Boxing", "Football", "Ice Hockey"]:
         # NOTE code for this plot from Elias
@@ -157,7 +167,7 @@ def plot_data(data: pd.DataFrame, dropdown_selection, log, amount_results):
             df_genders_amount,
             x=df_genders_amount.index,
             y=lines,
-            title="Gender Distribution of OS Competitors over time",
+            title="Gender Distribution of Olympic Athletes over time",
             labels={"variable": "Amount", "value": "Amount"},
             log_y=log,
         )
