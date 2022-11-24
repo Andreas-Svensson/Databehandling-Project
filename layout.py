@@ -4,6 +4,7 @@ import dash_bootstrap_components as dbc
 
 class Layout:
     def __init__(self, df) -> None:
+        # takes in df to get min and max values of year, used in range slider at the bottom of dashboard
         self._min = df["Year"].min()
         self._max = df["Year"].max()
 
@@ -11,6 +12,7 @@ class Layout:
         """returns the layout of the application"""
         return dbc.Container(
             [
+                # first row, banner of the dashboard, card with banner image and title
                 dbc.Card(
                     [
                         dbc.CardBody(
@@ -22,9 +24,11 @@ class Layout:
                     ],
                     id="banner",
                 ),
+                # second row, contains 3 columns with input options
                 dbc.Row(
                     className="col-3-wide",
                     children=[
+                        # first column, contains dropdown to select which graph to display
                         dbc.Col(
                             id="column-one",
                             children=[
@@ -38,18 +42,22 @@ class Layout:
                                         "Medals Football",
                                         "Medals Ice Hockey",
                                         "Gender Distribution",
-                                    ],  # set this to variable value
+                                    ],
                                     value="Medals USA",  # default value of dropdown
                                 )
                             ],
                         ),
+                        # second column, contains 2 button groups to select log_y and summer/winter results
                         dbc.Col(
                             id="column-two",
                             className="radio-group",
                             children=[
+                                # using a div here in order to style all contents with the buttons ID
                                 html.Div(
                                     id="buttons",
                                     children=[
+                                        # first button group of column 2, using RadioItems to select log_y True/False
+                                        # (restyled to look like buttons using CSS)
                                         dbc.RadioItems(
                                             id="log-buttons",
                                             className="btn-group",
@@ -69,6 +77,7 @@ class Layout:
                                             ],
                                             value=False,
                                         ),
+                                        # second button group of column 2, using Checklist to select summer and/or winter
                                         dbc.Checklist(
                                             id="season-picker",
                                             options=[
@@ -88,6 +97,7 @@ class Layout:
                                 ),
                             ],
                         ),
+                        # third column, containing results slider
                         dbc.Col(
                             id="column-three",
                             children=[
@@ -103,18 +113,21 @@ class Layout:
                         ),
                     ],
                 ),
+                # third row, displaying the graph
                 dbc.Row(dcc.Graph(id="graph-id")),
+                # fourth row, containing year slider, using RangeSlider to be able to select a range of year values
                 dbc.Row(
                     id="year-slider-row",
                     children=[
                         html.P("Year span:"),
                         dcc.RangeSlider(
                             id="year-slider",
-                            min=self._min,
+                            min=self._min,  # uses min and max values of df to know what value the slider should start and end at
                             max=self._max,
                             step=2,
+                            # styling the selected options to show as a square below the slider that always shows
                             tooltip=dict(placement="bottom", always_visible=True),
-                            marks=None,
+                            marks=None,  # hiding marks because above styling allows us to see which year we have selected
                         ),
                     ],
                 ),
