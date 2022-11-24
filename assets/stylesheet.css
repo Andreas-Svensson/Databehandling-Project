@@ -2,7 +2,7 @@
 /* ---------- Color Scheme ---------- */
 /* ---------- ------------ ---------- */
 
-/* Setting up global variables (done with :root) for the colors commonly used in the dashboard */
+/* Setting up global variables (done with :root) for the colors used in the dashboard */
 :root {
     --background: #0F2537;
     --element: #4E5D6C;
@@ -10,21 +10,18 @@
     --highlight: #02D2D5;
 }
 
+/* ---------- --------------- ---------- */
+/* ---------- Default Styling ---------- */
+/* ---------- --------------- ---------- */
+
+
+/* all columns  */
 .col {
     margin-top: 10px;
 }
 
-/* ---------- --------------- ---------- */
-/* ---------- Default Buttons ---------- */
-/* ---------- --------------- ---------- */
-
+/* all buttons */
 .btn {
-    /* background-color: var(--element); */
-    color: var(--text);
-}
-
-.btn:hover {
-    background-color: var(--background);
     color: var(--text);
 }
 
@@ -32,7 +29,7 @@
 /* ---------- Styling Button Group ---------- */
 /* ---------- -------------------- ---------- */
 
-/* RadioItems styling, changing RadioItems to act as a button group, this styling changes their padding and aligns them next to each other */
+/* RadioItems styling, changing RadioItems to act as a button group, changes their padding and aligns them next to each other */
 /* Source: https://dash-bootstrap-components.opensource.faculty.ai/docs/components/button_group/ */
 
 .radio-group .form-check {
@@ -63,7 +60,7 @@
     color: var(--text);
 }
 
-/* Default style for selected option of all dropdowns, note that !import has to be used for it to apply */
+/* Default style for current selected option of all dropdowns, note that !import has to be used for it to apply */
 .Select-value-label {
     color: var(--text) !important;
 }
@@ -84,25 +81,36 @@
 
 #banner h1 {
     padding-top: 10px;
-    margin-left: 2%;
     display: inline-block;
 }
 
 #banner Img {
-    /* position: relative; */
     float: right;
     margin-right: 2px;
     height: 75px;
 }
 
-/* makes elements in the column align side-by-side */
+/* ---------- --------- ---------- */
+/* ---------- Inputs ID ---------- */
+/* ---------- --------- ---------- */
+
+/* display: flex; makes elements align side-by-side since the default flex direction is row */
+/* this can be changed to flex direction col to instead put elements below each other */
+/* this is used below in styling for smaller screens */
 #buttons {
     display: flex;
 }
 
 #log-buttons {
-    /* prevent buttons from overlapping */
+    /* spacing between the two button groups */
     padding-right: 25px;
+}
+
+#amount-results-slider {
+    display: flex;
+    margin-top: 7px;
+    /* This property will expand the last item to the remaining width */
+    flex-grow: 1;
 }
 
 #year-slider-row {
@@ -126,24 +134,11 @@
     margin-left: 5px;
 }
 
-#amount-results-slider {
-    /* flex-wrap: wrap; */
-    display: flex;
-    margin-top: 7px;
-    /* This property will expand the last item to the remaining width */
-    flex-grow: 1;
-}
-
-#column-one {
-    /* background-color: chocolate; */
-}
-
-#column-two {
-    /* background-color: green; */
-}
+/* ---------- ----- ---------- */
+/* ---------- Other ---------- */
+/* ---------- ----- ---------- */
 
 #column-three {
-    /* background-color: red; */
     display: flex;
 }
 
@@ -156,13 +151,7 @@
     /* When screen width is <= 1200px  */
     /* Flexes text elements of button input row down */
 
-    /* .col-3-wide {
-        display: flex;
-        flex-direction: column;
-    } */
-
     #column-three {
-        /* display: flex; */
         flex-direction: column;
     }
 
@@ -173,10 +162,6 @@
     #season-picker label {
         margin-left: 0px;
     }
-
-    /* #test-slider {
-        flex-direction: column;
-    } */
 }
 
 @media (max-width: 767px) {
@@ -200,5 +185,5 @@
 }
 
 @media (orientation: landscape) and (max-width: 800px) {
-    /* maybe some custom styling for mobile devices in landscape mode is needed */
+    /* can add styling for smaller devices in landscape mode here */
 }
