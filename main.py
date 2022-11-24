@@ -1,22 +1,20 @@
 import os
+import pandas as pd
 import dash
 import dash_bootstrap_components as dbc
 from dash.dependencies import Output, Input
-import pandas as pd
-import plotly_express as px
 
 # importing scripts from this project:
 from layout import Layout
 from filter import filter_data, set_default_filters
 from plot import plot_data
 
-# for navigating relatively to the absolute path of this directory
+# navigating relatively to the absolute path of this directory
 dir_path = os.path.dirname(__file__)
 path = os.path.join(dir_path, "Data/anonymized_olympics_data.csv")
-# reading in anonymised version of data and storing as df
-df = pd.read_csv(path)
+df = pd.read_csv(path)  # reading in anonymised data and storing as df
 
-# using __name__ instead of hard typed name allows us to use "main" when deploying dashboard and __main__ when running from this file
+# using __name__ instead of hard typed name allows us to use "main" when deploying dashboard and "__main__" when running from this file
 # using theme SUPERHERO because we have USA ;)
 # meta tag used for responsiveness in dashboard (resizing based on screen size)
 app = dash.Dash(
@@ -40,6 +38,7 @@ app.layout = Layout(df).layout()
     Input("dropdown", "value"),
 )
 def set_default_options(dropdown_selection):
+    """Resets all button choices to default whenever the dropdown is used to show a new graph"""
     return set_default_filters(df, dropdown_selection)
 
 
@@ -52,11 +51,10 @@ def set_default_options(dropdown_selection):
     Input("amount-results-slider", "value"),
 )
 def update_graph(dropdown_selection, log, season, slider, results):
-
+    """Filters data based on button choices and returns a graph based on dropdown selection"""
     data = filter_data(df, season, slider)
     return plot_data(data, dropdown_selection, log, results)
 
 
 if __name__ == "__main__":
-    # run app if script is run from main
-    app.run_server()
+    app.run_server()  # run app if script is run from main
